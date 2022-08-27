@@ -108,9 +108,9 @@ class Store: ObservableObject {
     }
     
     public func loadPersistedState() throws {
-        try setLights(state: ToBooleanState(Defaults[.lightsState]))
-        try setVoicePrompts(state: ToBooleanState(Defaults[.voicePromptsState]))
-        try setRotateToMute(state: ToBooleanState(Defaults[.rotateToMuteState]))
+        if (capabilities.contains(.CAP_LIGHTS)) { try setLights(state: ToBooleanState(Defaults[.lightsState])) }
+        if (capabilities.contains(.CAP_VOICE_PROMPTS)) { try setVoicePrompts(state: ToBooleanState(Defaults[.voicePromptsState])) }
+        if (capabilities.contains(.CAP_ROTATE_TO_MUTE)) { try setRotateToMute(state: ToBooleanState(Defaults[.rotateToMuteState])) }
     }
 }
 
