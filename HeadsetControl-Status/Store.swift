@@ -7,8 +7,11 @@
 
 import Combine
 import SwiftUI
+import Defaults
 
 class Store: ObservableObject {
+    private var previousHeadsetDetectedState: Bool = false
+    
     @Published private(set) var headsetDetected: Bool = false
     @Published private(set) var powerState: BooleanState = BooleanState.Unknown
     @Published private(set) var deviceType: String? = nil
@@ -19,6 +22,9 @@ class Store: ObservableObject {
     @Published private(set) var lightsState: BooleanState = BooleanState.Unknown
     @Published private(set) var voicePromptsState: BooleanState = BooleanState.Unknown
     @Published private(set) var rotateToMuteState: BooleanState = BooleanState.Unknown
+    @Published private(set) var sideToneState: Int? = nil
+    @Published private(set) var inactiveTimeState: Int? = nil
+    @Published private(set) var equalizerPresetState: Int? = nil
     
     private let adapter: HeadsetControlAdapter?
     
@@ -37,6 +43,7 @@ class Store: ObservableObject {
         
         try adapter!.setLights(state: state)
         lightsState = state
+        Defaults[.lightsState] = ToBool(state)
     }
     
     func setVoicePrompts(state: BooleanState) throws {
@@ -46,15 +53,17 @@ class Store: ObservableObject {
         
         try adapter!.setVoicePrompts(state: state)
         voicePromptsState = state
+        Defaults[.voicePromptsState] = ToBool(state)
     }
     
     func setRotateToMute(state: BooleanState) throws {
-        if (!capabilities.contains(.CAP_ROTATE_TO_MUTE )) {
+        if (!capabilities.contains(.CAP_ROTATE_TO_MUTE)) {
             throw HeadsetControlError.UnsupportedFunctionError
         }
         
         try adapter!.setRotateToMute(state: state)
         rotateToMuteState = state
+        Defaults[.rotateToMuteState] = ToBool(state)
     }
     
     private func update() {
@@ -63,19 +72,26 @@ class Store: ObservableObject {
         }
         
         do {
-            self.headsetDetected = try self.adapter!.isAnyDeviceDetected()
+            headsetDetected = try self.adapter!.isAnyDeviceDetected()
             if (!headsetDetected) {
                 return resetState()
             }
             
-            self.powerState = try self.adapter!.getDevicePowerState()
-            self.deviceType = try self.adapter!.getDeviceType()
-            self.capabilities = try self.adapter!.getCapabilities()
-            self.batteryLevel = try self.adapter!.getBatteryLevel()
+            capabilities = try self.adapter!.getCapabilities()
+            
+            if (headsetDetected != previousHeadsetDetectedState) {
+                try loadPersistedState()
+            }
+            
+            powerState = try self.adapter!.getDevicePowerState()
+            deviceType = try self.adapter!.getDeviceType()
+            batteryLevel = try self.adapter!.getBatteryLevel()
         }
         catch {
             print(error)
         }
+        
+        previousHeadsetDetectedState = headsetDetected
     }
     
     private func resetState() {
@@ -86,5 +102,24 @@ class Store: ObservableObject {
         self.lightsState = BooleanState.Unknown
         self.voicePromptsState = BooleanState.Unknown
         self.rotateToMuteState = BooleanState.Unknown
+        self.sideToneState = nil
+        self.inactiveTimeState = nil
+        self.equalizerPresetState = nil
     }
+    
+    public func loadPersistedState() throws {
+        try setLights(state: ToBooleanState(Defaults[.lightsState]))
+        try setVoicePrompts(state: ToBooleanState(Defaults[.voicePromptsState]))
+        try setRotateToMute(state: ToBooleanState(Defaults[.rotateToMuteState]))
+    }
+}
+
+extension Defaults.Keys {
+    static let lightsState = Key<Bool?>("lightsState", default: nil)
+    static let voicePromptsState = Key<Bool?>("voicePromptsState", default: nil)
+    static let rotateToMuteState = Key<Bool?>("rotateToMuteState", default: nil)
+    
+    static let sideToneState = Key<Int?>("sideToneState", default: nil)
+    static let inactiveTimeState = Key<Int?>("inactiveTimeState", default: nil)
+    static let equalizerPresetState = Key<Int?>("equalizerPresetState", default: nil)
 }

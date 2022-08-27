@@ -59,3 +59,19 @@ func capabilityToString(_ cap: Capability) -> String {
         return "Equalizer presets"
     }
 }
+
+func ToBool(_ state: BooleanState?) -> Bool? {
+    switch (state) {
+    case .On: return true
+    case .Off: return false
+    default: return nil
+    }
+}
+
+func ToBooleanState(_ state: Bool?) -> BooleanState {
+    switch (state) {
+    case true: return .On
+    case false: return .Off
+    default: return .Unknown
+    }
+}
