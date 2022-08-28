@@ -11,6 +11,10 @@ import LaunchAtLogin
 struct SettingsView: View {
     @ObservedObject var store: Store
     
+    @State var sideToneLevel: Float = 0.0
+    @State var inactiveTimeLevel: Float = 0.0
+    @State var inactiveTimeSet: Bool = false
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 15.0) {
             ScrollView {
@@ -49,7 +53,9 @@ struct SettingsView: View {
                         .opacity(doesNotHaveCapability(cap: .CAP_SIDETONE) ? 0.50 : 1)
                 }
                 
-                Slider(value: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant(10)/*@END_MENU_TOKEN@*/)
+                Slider(
+                    value: $sideToneLevel,
+                    in: 0...128) { _ in onSideToneLevelChanged() }
                     .disabled(doesNotHaveCapability(cap: .CAP_SIDETONE))
             }
             
@@ -61,12 +67,15 @@ struct SettingsView: View {
                     
                     Spacer()
                     
-                    Toggle(isOn: .constant(false)) {}
+                    Toggle("", isOn: $inactiveTimeSet)
+                        .onChange(of: inactiveTimeSet, perform: onInactiveTimeToggled)
                         .toggleStyle(.switch)
                         .disabled(doesNotHaveCapability(cap: .CAP_INACTIVE_TIME))
                 }
                 
-                Slider(value: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant(10)/*@END_MENU_TOKEN@*/)
+                Slider(
+                    value: $inactiveTimeLevel,
+                    in: 0...128) { _ in onInactiveTimeChanged() }
                     .disabled(doesNotHaveCapability(cap: .CAP_INACTIVE_TIME))
             }
             
@@ -104,6 +113,33 @@ struct SettingsView: View {
     
     func doesNotHaveCapability(cap: Capability) -> Bool {
         return !store.capabilities.contains(cap)
+    }
+    
+    func onSideToneLevelChanged() {
+        do {
+            try store.setSideTone(level: sideToneLevel)
+        }
+        catch {
+            // TODO
+        }
+    }
+    
+    func onInactiveTimeChanged() {
+        do {
+            try store.setInactiveTime(time: inactiveTimeLevel)
+        }
+        catch {
+            // TODO
+        }
+    }
+    
+    func onInactiveTimeToggled(_ value: Bool) {
+        do {
+            try store.setInactiveTime(time: nil)
+        }
+        catch {
+            // TODO
+        }
     }
 }
 

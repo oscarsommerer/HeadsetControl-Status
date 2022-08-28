@@ -78,6 +78,18 @@ struct HeadsetControlAdapter {
         let _ = try runCommand(command: "-r \(command)")
     }
     
+    func setSideTone(level: Int?) throws {
+        let _ = try runCommand(command: "-s \(level ?? 0)")
+    }
+    
+    func setInactiveTime(time: Int?) throws {
+        let _ = try runCommand(command: "-i \(time ?? 0)")
+    }
+    
+    func setEqualizerPreset(preset: Int?) throws {
+        let _ = try runCommand(command: "-p \(preset ?? 0)")
+    }
+    
     private func runCommand(command: String?, machineReadable: Bool = true) throws -> String {
         let input = ["/opt/homebrew/bin/headsetcontrol", machineReadable ? "-c" : nil, command].compactMap { $0 }
         
