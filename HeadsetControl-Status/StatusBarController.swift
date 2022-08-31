@@ -7,37 +7,30 @@
 
 import AppKit
 import SwiftUI
+import Combine
 
 class StatusBarController {
     @ObservedObject var store: Store
     
     private var statusItem: NSStatusItem
     private var mainView: NSView
-    private var statusButtonIcon: NSImage!
+    private var statusBarButton: NSStatusBarButton?
     private var advancedSettingsWindowRef: NSWindow? = nil
+    
+    private var batteryLevelCancellable: AnyCancellable? = nil
 
-    init(_ mainView: NSView, store: Store) {
+    init(_ mainView: NSView, @ObservedObject store: Store) {
         self.mainView = mainView
         self.store = store
         
-        let batteryPercentRemaining: Int?
-        switch (store.batteryLevel) {
-        case .Draining(let percentRemaining):
-            batteryPercentRemaining = percentRemaining
-        default:
-            batteryPercentRemaining = nil
-        }
-        
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        statusButtonIcon = NSImage(systemSymbolName: "headphones.circle.fill", accessibilityDescription: nil)!
-            .withSymbolConfiguration(iconConfig(batteryPercentRemaining: batteryPercentRemaining))
+        statusBarButton = statusItem.button
         
-        if let statusBarButton = statusItem.button {
-            statusBarButton.image = statusButtonIcon
-            statusBarButton.imagePosition = NSControl.ImagePosition.imageLeft
-            if batteryPercentRemaining != nil {
-                statusBarButton.title = "\(batteryPercentRemaining!)%"
-            }
+        if statusBarButton != nil {
+            statusBarButton!.image = NSImage(systemSymbolName: "headphones.circle.fill", accessibilityDescription: nil)!
+                .withSymbolConfiguration(iconConfig(batteryPercentRemaining: nil))
+            statusBarButton!.imagePosition = NSControl.ImagePosition.imageLeft
+            
             
             let menuItem = NSMenuItem()
             menuItem.view = mainView
@@ -47,8 +40,29 @@ class StatusBarController {
             menu.addItem(MenuItem(title: "Advanced", action: #selector(openAdvancedMenu), keyEquivalent: "A"))
             menu.addItem(MenuItem(title: "Quit", action: #selector(quitApplication), keyEquivalent: "Q"))
             
-            
             statusItem.menu = menu
+        }
+        
+        batteryLevelCancellable = self.store.$batteryLevel.sink { _ in self.updateButton() }
+    }
+    
+    func updateButton() {
+        if statusBarButton == nil {
+            return
+        }
+        
+        let batteryPercentRemaining: Int?
+        switch (store.batteryLevel) {
+        case .Draining(let percentRemaining):
+            batteryPercentRemaining = percentRemaining
+        default:
+            batteryPercentRemaining = nil
+        }
+        
+        if batteryPercentRemaining != nil {
+            //statusBarButton!.title = "\(batteryPercentRemaining!)%"
+            statusBarButton!.image = NSImage(systemSymbolName: "headphones.circle.fill", accessibilityDescription: nil)!
+                .withSymbolConfiguration(iconConfig(batteryPercentRemaining: batteryPercentRemaining))
         }
     }
     
