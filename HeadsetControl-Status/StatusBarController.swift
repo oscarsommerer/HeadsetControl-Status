@@ -59,11 +59,9 @@ class StatusBarController {
             batteryPercentRemaining = nil
         }
         
-        if batteryPercentRemaining != nil {
-            //statusBarButton!.title = "\(batteryPercentRemaining!)%"
-            statusBarButton!.image = NSImage(systemSymbolName: "headphones.circle.fill", accessibilityDescription: nil)!
-                .withSymbolConfiguration(iconConfig(batteryPercentRemaining: batteryPercentRemaining))
-        }
+        //statusBarButton!.title = "\(batteryPercentRemaining!)%"
+        statusBarButton!.image = NSImage(systemSymbolName: "headphones.circle.fill", accessibilityDescription: nil)!
+            .withSymbolConfiguration(iconConfig(batteryPercentRemaining: batteryPercentRemaining))
     }
     
     func iconConfig(batteryPercentRemaining: Int?) -> NSImage.SymbolConfiguration! {
