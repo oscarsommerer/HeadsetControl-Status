@@ -109,6 +109,11 @@ struct SettingsView: View {
             }
         }
         .padding(20.0)
+        .onAppear {
+            sideToneLevel = store.sideToneState ?? 0.0
+            inactiveTimeLevel = store.inactiveTimeState ?? 0.0
+            inactiveTimeSet = store.inactiveTimeState != nil
+        }
     }
     
     func doesNotHaveCapability(cap: Capability) -> Bool {
@@ -116,6 +121,7 @@ struct SettingsView: View {
     }
     
     func onSideToneLevelChanged() {
+        print("CHANGE \(sideToneLevel)")
         do {
             try store.setSideTone(level: sideToneLevel)
         }
@@ -135,7 +141,12 @@ struct SettingsView: View {
     
     func onInactiveTimeToggled(_ value: Bool) {
         do {
-            try store.setInactiveTime(time: nil)
+            if value == false {
+                try store.setInactiveTime(time: nil)
+            }
+            else {
+                try store.setInactiveTime(time: inactiveTimeLevel)
+            }
         }
         catch {
             // TODO
