@@ -121,7 +121,6 @@ struct SettingsView: View {
     }
     
     func onSideToneLevelChanged() {
-        print("CHANGE \(sideToneLevel)")
         do {
             try store.setSideTone(level: sideToneLevel)
         }

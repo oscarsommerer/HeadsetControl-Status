@@ -26,9 +26,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let popupView = NSHostingView(rootView: StatusbarMenu(store: store))
         popupView.frame = NSRect(x: 0, y: 0, width: 200, height: 160)
         statusBar = StatusBarController(popupView, store: store)
+        
+        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(onWake), name: NSWorkspace.didWakeNotification, object: nil)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+    }
+    
+    @objc func onWake(_ n: NSNotification) {
+        do {
+            try store.loadPersistedState()
+        }
+        catch {
+            // TODO
+        }
     }
 }
