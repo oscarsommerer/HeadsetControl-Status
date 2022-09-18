@@ -10,8 +10,6 @@ import SwiftUI
 struct StatusbarMenu: View {
     @ObservedObject var store: Store
     
-    @State private var advancedSettingsWindowRef: NSWindow? = nil
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 5.0) {
             HStack(spacing: 10.0) {
@@ -48,30 +46,30 @@ struct StatusbarMenu: View {
             Divider()
             
             HStack {
-                Toggle(isOn: booleanStateToBool(state: store.lightsState, action: store.setLights)) {}
+                Toggle(isOn: $store.lightsOn) {}
                     .toggleStyle(.switch)
                     .disabled(doesNotHaveCapability(cap: .CAP_LIGHTS))
                 
                 Text("Lights")
-                    .opacity(doesNotHaveCapability(cap: .CAP_LIGHTS) ? 0.50 : 1)
+                    .opacity(getOpacityForCapability(.CAP_LIGHTS))
             }
             
             HStack {
-                Toggle(isOn: booleanStateToBool(state: store.voicePromptsState, action: store.setVoicePrompts)) {}
+                Toggle(isOn: $store.voicePromptsOn) {}
                     .toggleStyle(.switch)
                     .disabled(doesNotHaveCapability(cap: .CAP_VOICE_PROMPTS))
                 
                 Text("Voice prompts")
-                    .opacity(doesNotHaveCapability(cap: .CAP_VOICE_PROMPTS) ? 0.50 : 1)
+                    .opacity(getOpacityForCapability(.CAP_VOICE_PROMPTS))
             }
             
             HStack {
-                Toggle(isOn: booleanStateToBool(state: store.rotateToMuteState, action: store.setRotateToMute)) {}
+                Toggle(isOn: $store.rotateToMuteOn) {}
                     .toggleStyle(.switch)
                     .disabled(doesNotHaveCapability(cap: .CAP_ROTATE_TO_MUTE))
                 
                 Text("Rotate to mute")
-                    .opacity(doesNotHaveCapability(cap: .CAP_ROTATE_TO_MUTE) ? 0.50 : 1)
+                    .opacity(getOpacityForCapability(.CAP_ROTATE_TO_MUTE))
             }
             
             Divider()
@@ -81,17 +79,14 @@ struct StatusbarMenu: View {
     
     }
     
-    func booleanStateToBool(state: BooleanState, action: @escaping (BooleanState) throws -> Void) -> Binding<Bool> {
-        return Binding<Bool>(
-            get : { state == BooleanState.On },
-            set: {
-                do {
-                    try action($0 ? BooleanState.On : BooleanState.Off)
-                }
-                catch {
-                    // TODO: Handle
-                }
-            })
+    func getOpacityForCapability(_ cap: Capability) -> Double {
+        let hasCapability = store.capabilities.contains(cap)
+        
+        if (!hasCapability) {
+            return 0.50
+        }
+        
+        return 1
     }
     
     func doesNotHaveCapability(cap: Capability) -> Bool {

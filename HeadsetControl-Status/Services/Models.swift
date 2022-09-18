@@ -15,6 +15,29 @@ enum Capability: String.Element {
     case CAP_VOICE_PROMPTS      = "v"
     case CAP_ROTATE_TO_MUTE     = "r"
     case CAP_EQUALIZER_PRESET   = "p"
+    
+    func ToString() -> String {
+        switch self {
+        case .CAP_SIDETONE:
+            return "Sidetone"
+        case .CAP_BATTERY_STATUS:
+            return "Battery status"
+        case .CAP_NOTIFICATION_SOUND:
+            return "Notification sounds"
+        case .CAP_LIGHTS:
+            return "Lights"
+        case .CAP_INACTIVE_TIME:
+            return "Inactive time"
+        case .CAP_CHATMIX_STATUS:
+            return "Chatmix"
+        case .CAP_VOICE_PROMPTS:
+            return "Voice prompts"
+        case .CAP_ROTATE_TO_MUTE:
+            return "Rotate to mute"
+        case .CAP_EQUALIZER_PRESET:
+            return "Equalizer presets"
+        }
+    }
 }
 
 typealias DeviceCapabilities = [Capability]
@@ -35,43 +58,26 @@ enum BooleanState {
     case On
     case Off
     case Unknown
-}
-
-func capabilityToString(_ cap: Capability) -> String {
-    switch cap {
-    case .CAP_SIDETONE:
-        return "Sidetone"
-    case .CAP_BATTERY_STATUS:
-        return "Battery status"
-    case .CAP_NOTIFICATION_SOUND:
-        return "Notification sounds"
-    case .CAP_LIGHTS:
-        return "Lights"
-    case .CAP_INACTIVE_TIME:
-        return "Inactive time"
-    case .CAP_CHATMIX_STATUS:
-        return "Chatmix"
-    case .CAP_VOICE_PROMPTS:
-        return "Voice prompts"
-    case .CAP_ROTATE_TO_MUTE:
-        return "Rotate to mute"
-    case .CAP_EQUALIZER_PRESET:
-        return "Equalizer presets"
+    
+    func AsBool() -> Bool {
+        switch self {
+        case .On:
+            return true
+        case .Off:
+            return false
+        case .Unknown:
+            return false
+        }
     }
-}
-
-func ToBool(_ state: BooleanState?) -> Bool? {
-    switch (state) {
-    case .On: return true
-    case .Off: return false
-    default: return nil
-    }
-}
-
-func ToBooleanState(_ state: Bool?) -> BooleanState {
-    switch (state) {
-    case true: return .On
-    case false: return .Off
-    default: return .Unknown
+    
+    static func FromBool(_ state: Bool?) -> BooleanState {
+        switch state {
+        case true:
+            return BooleanState.On
+        case false:
+            return BooleanState.Off
+        default:
+            return BooleanState.Unknown
+        }
     }
 }

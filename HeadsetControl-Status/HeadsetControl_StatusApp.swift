@@ -34,12 +34,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
     
-    @objc func onWake(_ n: NSNotification) {
-        do {
-            try store.loadPersistedState()
-        }
-        catch {
-            // TODO
-        }
-    }
+    @objc func onWake(_ n: NSNotification) { store.restorePersistedState() }
 }

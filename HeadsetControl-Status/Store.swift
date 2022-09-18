@@ -10,128 +10,194 @@ import SwiftUI
 import Defaults
 
 class Store: ObservableObject {
-    private var previousHeadsetDetectedState: Bool = false
-    
     @Published private(set) var headsetDetected: Bool = false
     @Published private(set) var powerState: BooleanState = BooleanState.Unknown
+    @Published private(set) var batteryLevel: BatteryLevel = BatteryLevel.Unknown
     @Published private(set) var deviceType: String? = nil
-    
     @Published private(set) var capabilities: [Capability] = []
     
-    @Published private(set) var batteryLevel: BatteryLevel = BatteryLevel.Unknown
-    @Published private(set) var lightsState: BooleanState = BooleanState.Unknown
-    @Published private(set) var voicePromptsState: BooleanState = BooleanState.Unknown
-    @Published private(set) var rotateToMuteState: BooleanState = BooleanState.Unknown
-    @Published private(set) var sideToneState: Float? = nil
-    @Published private(set) var inactiveTimeState: Float? = nil
-    @Published private(set) var equalizerPresetState: Int? = nil
+    @Published var lightsOn: Bool = false
+    @Published var voicePromptsOn: Bool = false
+    @Published var rotateToMuteOn: Bool = false
+    @Published var inactiveTimeOn: Bool = false
+
+    @Published var sideToneLevel: Double = 0.0
+    @Published var inactiveTime: Double = 0.0
+    @Published var equalizerPreset: Int = 0
     
-    private let adapter: HeadsetControlAdapter?
+    private var _previousHeadsetDetectedState: Bool = false
+    private let _adapter: HeadsetControlAdapter?
+    
+    private var cancellabels: [AnyCancellable] = []
     
     init(_ cliAdapter: HeadsetControlAdapter? = nil) {
-        adapter = cliAdapter
+        _adapter = cliAdapter
         
         // TODO: Remove timer if no supported USB Device is connected & wait for USB Device connected signal
         let timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in self.update() }
         RunLoop.main.add(timer, forMode: .common)
+        
+        $lightsOn
+            .print("lightsOn")
+            .sink(receiveValue: { value in self.setLights(state: BooleanState.FromBool(value)) })
+            .store(in: &cancellabels)
+        
+        $voicePromptsOn
+            .sink(receiveValue: { value in self.setVoicePrompts(state: BooleanState.FromBool(value)) })
+            .store(in: &cancellabels)
+        
+        $rotateToMuteOn
+            .sink(receiveValue: { value in self.setRotateToMute(state: BooleanState.FromBool(value)) })
+            .store(in: &cancellabels)
+        
+        $inactiveTimeOn
+            .sink(receiveValue: { value in self.setInactiveTimeOn(on: value) })
+            .store(in: &cancellabels)
+        
+        $sideToneLevel
+            .sink(receiveValue: { value in self.setSideTone(level: value) })
+            .store(in: &cancellabels)
+        
+        $inactiveTime
+            .sink(receiveValue: { value in self.setInactiveTime(time: value) })
+            .store(in: &cancellabels)
+        
+        $equalizerPreset
+            .sink(receiveValue: { value in self.setEqualizerPreset(preset: value) })
+            .store(in: &cancellabels)
     }
     
-    func setLights(state: BooleanState) throws {
+    private func setLights(state: BooleanState) {
         if (!capabilities.contains(.CAP_LIGHTS)) {
-            throw HeadsetControlError.UnsupportedFunctionError
-        }
-        
-        try adapter!.setLights(state: state)
-        lightsState = state
-        Defaults[.lightsState] = ToBool(state)
-    }
-    
-    func setVoicePrompts(state: BooleanState) throws {
-        if (!capabilities.contains(.CAP_VOICE_PROMPTS)) {
-            throw HeadsetControlError.UnsupportedFunctionError
-        }
-        
-        try adapter!.setVoicePrompts(state: state)
-        voicePromptsState = state
-        Defaults[.voicePromptsState] = ToBool(state)
-    }
-    
-    func setRotateToMute(state: BooleanState) throws {
-        if (!capabilities.contains(.CAP_ROTATE_TO_MUTE)) {
-            throw HeadsetControlError.UnsupportedFunctionError
-        }
-        
-        try adapter!.setRotateToMute(state: state)
-        rotateToMuteState = state
-        Defaults[.rotateToMuteState] = ToBool(state)
-    }
-    
-    func setSideTone(level: Float?) throws {
-        if (!capabilities.contains(.CAP_SIDETONE)) {
-            throw HeadsetControlError.UnsupportedFunctionError
-        }
-        
-        var intValue: Int?
-        if (level != nil) {
-            intValue = Int(level!)
-        }
-        
-        try adapter!.setSideTone(level: intValue)
-        sideToneState = level
-        Defaults[.sideToneState] = level
-    }
-    
-    func setInactiveTime(time: Float?) throws {
-        if (!capabilities.contains(.CAP_INACTIVE_TIME)) {
-            throw HeadsetControlError.UnsupportedFunctionError
-        }
-        
-        var intValue: Int?
-        if (time != nil) {
-            intValue = Int(time!)
-        }
-        
-        try adapter!.setInactiveTime(time: intValue)
-        inactiveTimeState = time
-        Defaults[.inactiveTimeState] = time
-    }
-    
-    func setEqualizerPreset(preset: Int?) throws {
-        if (!capabilities.contains(.CAP_EQUALIZER_PRESET)) {
-            throw HeadsetControlError.UnsupportedFunctionError
-        }
-        
-        try adapter!.setEqualizerPreset(preset: preset)
-        equalizerPresetState = preset
-        Defaults[.equalizerPresetState] = preset
-    }
-    
-    private func update() {
-        if (adapter == nil) {
             return
         }
         
         do {
-            headsetDetected = try self.adapter!.isAnyDeviceDetected()
+            try _adapter!.setLights(state: state)
+            Defaults[.lightsOn] = state.AsBool()
+        }
+        catch {
+            // TODO
+        }
+    }
+    
+    private func setVoicePrompts(state: BooleanState) {
+        if (!capabilities.contains(.CAP_VOICE_PROMPTS)) {
+            return
+        }
+        
+        do {
+            try _adapter!.setVoicePrompts(state: state)
+            Defaults[.voicePromptsOn] = state.AsBool()
+        }
+        catch {
+            // TODO
+        }
+    }
+    
+    private func setInactiveTimeOn(on: Bool) {
+        if (!capabilities.contains(.CAP_INACTIVE_TIME)) {
+            return
+        }
+        
+        let value = on ? Int(self.inactiveTime) : nil
+        
+        do {
+            try _adapter!.setInactiveTime(time: value)
+            Defaults[.inactiveTimeOn] = on
+        }
+        catch {
+            // TODO
+        }
+    }
+    
+    private func setRotateToMute(state: BooleanState) {
+        if (!capabilities.contains(.CAP_ROTATE_TO_MUTE)) {
+            return
+        }
+        
+        do {
+            try _adapter!.setRotateToMute(state: state)
+            Defaults[.rotateToMuteOn] = state.AsBool()
+        }
+        catch {
+            // TODO
+        }
+    }
+    
+    private func setSideTone(level: Double) {
+        if (!capabilities.contains(.CAP_SIDETONE)) {
+            return
+        }
+        
+        do {
+            try _adapter!.setSideTone(level: Int(level))
+            Defaults[.sideToneLevel] = level
+        }
+        catch {
+            // TODO
+        }
+    }
+    
+    private func setInactiveTime(time: Double) {
+        if (!capabilities.contains(.CAP_INACTIVE_TIME)) {
+            return
+        }
+        
+        if (!self.inactiveTimeOn) {
+            self.inactiveTimeOn = true
+        }
+        
+        do {
+            try _adapter!.setInactiveTime(time: Int(time))
+            Defaults[.inactiveTime] = time
+        }
+        catch {
+            // TODO
+        }
+    }
+    
+    private func setEqualizerPreset(preset: Int) {
+        if (!capabilities.contains(.CAP_EQUALIZER_PRESET)) {
+            return
+        }
+        
+        do {
+            try _adapter!.setEqualizerPreset(preset: preset)
+            Defaults[.equalizerPreset] = preset
+        }
+        catch {
+            // TODO
+        }
+    }
+    
+    private func update() {
+        if (_adapter == nil) {
+            return
+        }
+        
+        do {
+            headsetDetected = try self._adapter!.isAnyDeviceDetected()
             if (!headsetDetected) {
                 return resetState()
             }
             
-            capabilities = try self.adapter!.getCapabilities()
+            capabilities = try self._adapter!.getCapabilities()
             
-            if (headsetDetected != previousHeadsetDetectedState) {
-                try loadPersistedState()
+            if (headsetDetected.toNative() != _previousHeadsetDetectedState) {
+                restorePersistedState()
             }
             
-            powerState = try self.adapter!.getDevicePowerState()
-            deviceType = try self.adapter!.getDeviceType()
-            batteryLevel = try self.adapter!.getBatteryLevel()
+            powerState = try self._adapter!.getDevicePowerState()
+            deviceType = try self._adapter!.getDeviceType()
+            batteryLevel = try self._adapter!.getBatteryLevel()
         }
         catch {
+            // TODO
             print(error)
         }
         
-        previousHeadsetDetectedState = headsetDetected
+        _previousHeadsetDetectedState = headsetDetected
     }
     
     private func resetState() {
@@ -139,30 +205,33 @@ class Store: ObservableObject {
         self.powerState = BooleanState.Unknown
         self.capabilities = []
         self.batteryLevel = BatteryLevel.Unknown
-        self.lightsState = BooleanState.Unknown
-        self.voicePromptsState = BooleanState.Unknown
-        self.rotateToMuteState = BooleanState.Unknown
-        self.sideToneState = nil
-        self.inactiveTimeState = nil
-        self.equalizerPresetState = nil
+        self.lightsOn = false
+        self.voicePromptsOn = false
+        self.rotateToMuteOn = false
+        self.inactiveTimeOn = false
+        self.sideToneLevel = 0.0
+        self.inactiveTime = 0.0
+        self.equalizerPreset = 0
     }
     
-    public func loadPersistedState() throws {
-        if (capabilities.contains(.CAP_LIGHTS)) { try setLights(state: ToBooleanState(Defaults[.lightsState])) }
-        if (capabilities.contains(.CAP_VOICE_PROMPTS)) { try setVoicePrompts(state: ToBooleanState(Defaults[.voicePromptsState])) }
-        if (capabilities.contains(.CAP_ROTATE_TO_MUTE)) { try setRotateToMute(state: ToBooleanState(Defaults[.rotateToMuteState])) }
-        if (capabilities.contains(.CAP_SIDETONE)) { try setSideTone(level: Defaults[.sideToneState]) }
-        if (capabilities.contains(.CAP_INACTIVE_TIME)) { try setInactiveTime(time: Defaults[.inactiveTimeState]) }
-        if (capabilities.contains(.CAP_EQUALIZER_PRESET)) { try setEqualizerPreset(preset: Defaults[.equalizerPresetState]) }
+    public func restorePersistedState() {
+        if (capabilities.contains(.CAP_LIGHTS)) { self.lightsOn = Defaults[.lightsOn] }
+        if (capabilities.contains(.CAP_VOICE_PROMPTS)) { self.voicePromptsOn = Defaults[.voicePromptsOn] }
+        if (capabilities.contains(.CAP_ROTATE_TO_MUTE)) { self.rotateToMuteOn = Defaults[.rotateToMuteOn] }
+        if (capabilities.contains(.CAP_SIDETONE)) { self.sideToneLevel = Defaults[.sideToneLevel] }
+        if (capabilities.contains(.CAP_INACTIVE_TIME)) { self.inactiveTimeOn = Defaults[.inactiveTimeOn] }
+        if (capabilities.contains(.CAP_INACTIVE_TIME)) { self.inactiveTime = Defaults[.inactiveTime] }
+        if (capabilities.contains(.CAP_EQUALIZER_PRESET)) { self.equalizerPreset = Defaults[.equalizerPreset] }
     }
 }
 
 extension Defaults.Keys {
-    static let lightsState = Key<Bool?>("lightsState", default: nil)
-    static let voicePromptsState = Key<Bool?>("voicePromptsState", default: nil)
-    static let rotateToMuteState = Key<Bool?>("rotateToMuteState", default: nil)
+    static let lightsOn = Key<Bool>("lightsOn", default: false)
+    static let voicePromptsOn = Key<Bool>("voicePromptsOn", default: false)
+    static let rotateToMuteOn = Key<Bool>("rotateToMuteOn", default: true)
+    static let inactiveTimeOn = Key<Bool>("inactiveTimeOn", default: false)
     
-    static let sideToneState = Key<Float?>("sideToneState", default: nil)
-    static let inactiveTimeState = Key<Float?>("inactiveTimeState", default: nil)
-    static let equalizerPresetState = Key<Int?>("equalizerPresetState", default: nil)
+    static let sideToneLevel = Key<Double>("sideToneLevel", default: 0.0)
+    static let inactiveTime = Key<Double>("inactiveTime", default: 0.0)
+    static let equalizerPreset = Key<Int>("equalizerPreset", default: 0)
 }

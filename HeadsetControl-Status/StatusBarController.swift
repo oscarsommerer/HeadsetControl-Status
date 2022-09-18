@@ -17,9 +17,9 @@ class StatusBarController {
     private var statusBarButton: NSStatusBarButton?
     private var advancedSettingsWindowRef: NSWindow? = nil
     
-    private var batteryLevelCancellable: AnyCancellable? = nil
+    private var cancellables: [AnyCancellable] = []
 
-    init(_ mainView: NSView, @ObservedObject store: Store) {
+    init(_ mainView: NSView, store: Store) {
         self.mainView = mainView
         self.store = store
         
@@ -43,7 +43,9 @@ class StatusBarController {
             statusItem.menu = menu
         }
         
-        batteryLevelCancellable = self.store.$batteryLevel.sink { _ in self.updateButton() }
+        self.store.$batteryLevel
+            .sink { _ in self.updateButton() }
+            .store(in: &cancellables)
     }
     
     func updateButton() {
@@ -89,7 +91,7 @@ class StatusBarController {
         
         advancedSettingsWindowRef = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 350, height: 420),
-            styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView, .utilityWindow],
+            styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView],
             backing: .buffered, defer: false)
         
         advancedSettingsWindowRef!.isReleasedWhenClosed = false

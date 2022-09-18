@@ -11,10 +11,6 @@ import LaunchAtLogin
 struct SettingsView: View {
     @ObservedObject var store: Store
     
-    @State var sideToneLevel: Float = 0.0
-    @State var inactiveTimeLevel: Float = 0.0
-    @State var inactiveTimeSet: Bool = false
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 15.0) {
             ScrollView {
@@ -31,7 +27,7 @@ struct SettingsView: View {
                             
                             VStack(alignment: .leading) {
                                 ForEach(store.capabilities, id: \.self) { cap in
-                                    Text(capabilityToString(cap))
+                                    Text(cap.ToString())
                                 }
                             }
                         } else {
@@ -50,12 +46,10 @@ struct SettingsView: View {
                 HStack(alignment: .bottom, spacing: 5.0) {
                     Text("Sidetone")
                         .font(.headline)
-                        .opacity(doesNotHaveCapability(cap: .CAP_SIDETONE) ? 0.50 : 1)
+                        .opacity(getOpacityForCapability(.CAP_SIDETONE))
                 }
                 
-                Slider(
-                    value: $sideToneLevel,
-                    in: 0...128) { _ in onSideToneLevelChanged() }
+                Slider(value: $store.sideToneLevel, in: 0...128)
                     .disabled(doesNotHaveCapability(cap: .CAP_SIDETONE))
             }
             
@@ -63,29 +57,26 @@ struct SettingsView: View {
                 HStack(alignment: .bottom, spacing: 5.0) {
                     Text("Inactive time")
                         .font(.headline)
-                        .opacity(doesNotHaveCapability(cap: .CAP_INACTIVE_TIME) ? 0.50 : 1)
+                        .opacity(getOpacityForCapability(.CAP_INACTIVE_TIME))
                     
                     Spacer()
                     
-                    Toggle("", isOn: $inactiveTimeSet)
-                        .onChange(of: inactiveTimeSet, perform: onInactiveTimeToggled)
+                    Toggle("", isOn: $store.inactiveTimeOn)
                         .toggleStyle(.switch)
                         .disabled(doesNotHaveCapability(cap: .CAP_INACTIVE_TIME))
                 }
                 
-                Slider(
-                    value: $inactiveTimeLevel,
-                    in: 0...128) { _ in onInactiveTimeChanged() }
+                Slider(value: $store.inactiveTime, in: 0...128)
                     .disabled(doesNotHaveCapability(cap: .CAP_INACTIVE_TIME))
             }
             
             VStack(alignment: .leading) {
                 Text("Equalizer preset")
                     .font(.headline)
-                    .opacity(doesNotHaveCapability(cap: .CAP_EQUALIZER_PRESET) ? 0.50 : 1)
+                    .opacity(getOpacityForCapability(.CAP_EQUALIZER_PRESET))
                 
                 
-                Picker(selection: .constant(0), label: Text("")) {
+                Picker(selection: $store.equalizerPreset, label: Text("")) {
                     Text("Default").tag(0)
                     Text("1").tag(1)
                     Text("2").tag(2)
@@ -109,47 +100,20 @@ struct SettingsView: View {
             }
         }
         .padding(20.0)
-        .onAppear {
-            sideToneLevel = store.sideToneState ?? 0.0
-            inactiveTimeLevel = store.inactiveTimeState ?? 0.0
-            inactiveTimeSet = store.inactiveTimeState != nil
-        }
     }
     
     func doesNotHaveCapability(cap: Capability) -> Bool {
         return !store.capabilities.contains(cap)
     }
     
-    func onSideToneLevelChanged() {
-        do {
-            try store.setSideTone(level: sideToneLevel)
+    func getOpacityForCapability(_ cap: Capability) -> Double {
+        let hasCapability = store.capabilities.contains(cap)
+        
+        if (!hasCapability) {
+            return 0.50
         }
-        catch {
-            // TODO
-        }
-    }
-    
-    func onInactiveTimeChanged() {
-        do {
-            try store.setInactiveTime(time: inactiveTimeLevel)
-        }
-        catch {
-            // TODO
-        }
-    }
-    
-    func onInactiveTimeToggled(_ value: Bool) {
-        do {
-            if value == false {
-                try store.setInactiveTime(time: nil)
-            }
-            else {
-                try store.setInactiveTime(time: inactiveTimeLevel)
-            }
-        }
-        catch {
-            // TODO
-        }
+        
+        return 1
     }
 }
 
