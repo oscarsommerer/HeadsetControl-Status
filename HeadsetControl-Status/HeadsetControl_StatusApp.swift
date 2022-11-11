@@ -30,8 +30,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(onWake), name: NSWorkspace.didWakeNotification, object: nil)
     }
 
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+func applicationWillTerminate(_ aNotification: Notification) {
+         // Insert code here to tear down your application
     }
     
     @objc func onWake(_ n: NSNotification) { store.restorePersistedState() }

@@ -38,7 +38,6 @@ class Store: ObservableObject {
         RunLoop.main.add(timer, forMode: .common)
         
         $lightsOn
-            .print("lightsOn")
             .sink(receiveValue: { value in self.setLights(state: BooleanState.FromBool(value)) })
             .store(in: &cancellabels)
         
