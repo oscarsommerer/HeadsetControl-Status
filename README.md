@@ -2,9 +2,10 @@
 
 Lightweight macOS status bar app that displays info and allows control of headsets supported by [HeadsetControl](https://github.com/Sapd/HeadsetControl).
 
-<div style="text-align: center">
+<p align="center">
+<img src="docs/images/image1.png" />
+</p>
 
-![](docs/images/image1.png)
-![](docs/images/image2.png)
-
-</div>
+<p align="center">
+<img src="docs/images/image2.png" />
+</p>
