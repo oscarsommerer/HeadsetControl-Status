@@ -12,6 +12,5 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Build
-      run: 
-        shell: xcodebuild clean build -scheme HeadsetControl-Status -configuration Release
-        working-directory: ..
+      run: xcodebuild clean build -scheme HeadsetControl-Status -configuration Release
+      working-directory: ..
