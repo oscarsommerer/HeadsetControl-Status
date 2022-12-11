@@ -13,7 +13,7 @@ jobs:
 
     - uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: latest-stable
+        xcode-version: '14.1'
 
     - name: Build
       run: xcodebuild clean build -scheme HeadsetControl-Status -configuration Release
