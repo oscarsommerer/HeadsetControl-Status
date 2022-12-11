@@ -22,4 +22,7 @@ jobs:
     - name: Export app
       run: xcodebuild -archivePath build/archive.xcarchive -exportArchive -exportPath ./release/HeadsetControl-Status.app -exportOptionsPlist ./exportOptions.plist
       env: 
-        DEVELOPMENT_TEAM: "Personal"
+        CODE_SIGN_IDENTITY: ""
+        CODE_SIGNING_REQUIRED: "NO"
+        CODE_SIGN_ENTITLEMENTS: ""
+        CODE_SIGNING_ALLOWED: "NO"
