@@ -28,5 +28,5 @@ jobs:
 
     - name: Create release
       uses: ncipollo/release-action@v1
-        with:
-          artifacts: ./release/HeadsetControl-Status.app
+      with:
+        artifacts: ./release/HeadsetControl-Status.app
