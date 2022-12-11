@@ -21,3 +21,5 @@ jobs:
 
     - name: Export app
       run: xcodebuild -archivePath build/archive.xcarchive -exportArchive -exportPath ./release/HeadsetControl-Status.app -exportOptionsPlist ./exportOptions.plist
+      env: 
+        DEVELOPMENT_TEAM: "Personal"
