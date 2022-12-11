@@ -1,0 +1,21 @@
+name: build
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-12
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build
+      run: xcodebuild clean build -scheme HeadsetControl-Status -configuration Release
+
+    - name: Create archive
+      run: xcodebuild archive -scheme HeadsetControl-Status -configuration Release -archivePath ./build/archive
+
+    - name: Export app
+      run: xcodebuild -archivePath ./build/archive.xarchive -exportArchive -exportPath ./release/HeadsetControl-Status.app -exportOptionsPlist HeadsetControl-Status/Info.plist
