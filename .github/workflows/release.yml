@@ -27,9 +27,9 @@ jobs:
       run: xcodebuild -archivePath build/archive.xcarchive -exportArchive -exportPath ./release/HeadsetControl-Status.app -exportOptionsPlist ./exportOptions.plist
 
     - run: ls -R
-    
+
     - name: Create release
       uses: ncipollo/release-action@v1
       with:
         artifacts: ./release/HeadsetControl-Status.app
-        tag: { env.BUILD_VERSION }
+        tag: ${{ env.BUILD_VERSION }}
