@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "defaults",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sindresorhus/Defaults",
+      "state" : {
+        "revision" : "981ccb0a01c54abbe3c12ccb8226108527bbf115",
+        "version" : "6.3.0"
+      }
+    },
+    {
+      "identity" : "launchatlogin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sindresorhus/LaunchAtLogin",
+      "state" : {
+        "revision" : "e8171b3e38a2816f579f58f3dac1522aa39efe41",
+        "version" : "4.2.0"
+      }
+    },
+    {
+      "identity" : "subprocess",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jamf/Subprocess.git",
+      "state" : {
+        "revision" : "8bd63b5a5e8a3340fa2103cd69203bf94f4b2601",
+        "version" : "2.0.0"
+      }
+    }
+  ],
+  "version" : 2
+}

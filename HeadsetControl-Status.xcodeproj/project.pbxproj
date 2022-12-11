@@ -1,0 +1,476 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		551EB55428B237C00064DF43 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551EB55328B237C00064DF43 /* SettingsView.swift */; };
+		5560F37228AFFE0100AAB565 /* Subprocess in Frameworks */ = {isa = PBXBuildFile; productRef = 5560F37128AFFE0100AAB565 /* Subprocess */; };
+		5568BEFF28B0190D00D0B721 /* HeadsetControlAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568BEFE28B0190D00D0B721 /* HeadsetControlAdapter.swift */; };
+		5568BF0228B0199B00D0B721 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568BF0128B0199B00D0B721 /* Models.swift */; };
+		5568BF0428B13CC300D0B721 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568BF0328B13CC300D0B721 /* Store.swift */; };
+		5568BF0928B1438300D0B721 /* BatteryComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5568BF0828B1438300D0B721 /* BatteryComponent.swift */; };
+		55946ADF28B6ABFD006B5797 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 55946ADE28B6ABFD006B5797 /* LaunchAtLogin */; };
+		55DB993428BAB52F007021DF /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 55DB993328BAB52F007021DF /* Defaults */; };
+		55E6B6FA28AFAB1A0086F79F /* HeadsetControl_StatusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6B6F928AFAB1A0086F79F /* HeadsetControl_StatusApp.swift */; };
+		55E6B6FC28AFAB1A0086F79F /* StatusbarMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6B6FB28AFAB1A0086F79F /* StatusbarMenuView.swift */; };
+		55E6B6FE28AFAB1A0086F79F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E6B6FD28AFAB1A0086F79F /* Assets.xcassets */; };
+		55E6B70128AFAB1A0086F79F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55E6B70028AFAB1A0086F79F /* Preview Assets.xcassets */; };
+		55E6B70928AFAB9D0086F79F /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E6B70828AFAB9D0086F79F /* StatusBarController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		551EB55328B237C00064DF43 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		5568BEFE28B0190D00D0B721 /* HeadsetControlAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadsetControlAdapter.swift; sourceTree = "<group>"; };
+		5568BF0128B0199B00D0B721 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		5568BF0328B13CC300D0B721 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		5568BF0828B1438300D0B721 /* BatteryComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryComponent.swift; sourceTree = "<group>"; };
+		55E6B6F628AFAB1A0086F79F /* HeadsetControl-Status.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HeadsetControl-Status.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55E6B6F928AFAB1A0086F79F /* HeadsetControl_StatusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadsetControl_StatusApp.swift; sourceTree = "<group>"; };
+		55E6B6FB28AFAB1A0086F79F /* StatusbarMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusbarMenuView.swift; sourceTree = "<group>"; };
+		55E6B6FD28AFAB1A0086F79F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		55E6B70028AFAB1A0086F79F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		55E6B70228AFAB1A0086F79F /* HeadsetControl_Status.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HeadsetControl_Status.entitlements; sourceTree = "<group>"; };
+		55E6B70828AFAB9D0086F79F /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
+		55E6B70A28AFAD1B0086F79F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		55E6B6F328AFAB1A0086F79F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55DB993428BAB52F007021DF /* Defaults in Frameworks */,
+				55946ADF28B6ABFD006B5797 /* LaunchAtLogin in Frameworks */,
+				5560F37228AFFE0100AAB565 /* Subprocess in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		551EB55228B236660064DF43 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				551EB55328B237C00064DF43 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		5568BF0028B0196F00D0B721 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5568BEFE28B0190D00D0B721 /* HeadsetControlAdapter.swift */,
+				5568BF0128B0199B00D0B721 /* Models.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5568BF0528B1431C00D0B721 /* StatusbarMenu */ = {
+			isa = PBXGroup;
+			children = (
+				55E6B6FB28AFAB1A0086F79F /* StatusbarMenuView.swift */,
+				5568BF0828B1438300D0B721 /* BatteryComponent.swift */,
+			);
+			path = StatusbarMenu;
+			sourceTree = "<group>";
+		};
+		55E6B6ED28AFAB1A0086F79F = {
+			isa = PBXGroup;
+			children = (
+				55E6B6F828AFAB1A0086F79F /* HeadsetControl-Status */,
+				55E6B6F728AFAB1A0086F79F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		55E6B6F728AFAB1A0086F79F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55E6B6F628AFAB1A0086F79F /* HeadsetControl-Status.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		55E6B6F828AFAB1A0086F79F /* HeadsetControl-Status */ = {
+			isa = PBXGroup;
+			children = (
+				551EB55228B236660064DF43 /* Settings */,
+				5568BF0528B1431C00D0B721 /* StatusbarMenu */,
+				5568BF0028B0196F00D0B721 /* Services */,
+				55E6B70A28AFAD1B0086F79F /* Info.plist */,
+				55E6B6F928AFAB1A0086F79F /* HeadsetControl_StatusApp.swift */,
+				55E6B6FD28AFAB1A0086F79F /* Assets.xcassets */,
+				55E6B70228AFAB1A0086F79F /* HeadsetControl_Status.entitlements */,
+				55E6B6FF28AFAB1A0086F79F /* Preview Content */,
+				55E6B70828AFAB9D0086F79F /* StatusBarController.swift */,
+				5568BF0328B13CC300D0B721 /* Store.swift */,
+			);
+			path = "HeadsetControl-Status";
+			sourceTree = "<group>";
+		};
+		55E6B6FF28AFAB1A0086F79F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				55E6B70028AFAB1A0086F79F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		55E6B6F528AFAB1A0086F79F /* HeadsetControl-Status */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55E6B70528AFAB1A0086F79F /* Build configuration list for PBXNativeTarget "HeadsetControl-Status" */;
+			buildPhases = (
+				55E6B6F228AFAB1A0086F79F /* Sources */,
+				55E6B6F328AFAB1A0086F79F /* Frameworks */,
+				55E6B6F428AFAB1A0086F79F /* Resources */,
+				55946AE028B6AC38006B5797 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HeadsetControl-Status";
+			packageProductDependencies = (
+				5560F37128AFFE0100AAB565 /* Subprocess */,
+				55946ADE28B6ABFD006B5797 /* LaunchAtLogin */,
+				55DB993328BAB52F007021DF /* Defaults */,
+			);
+			productName = "HeadsetControl-Status";
+			productReference = 55E6B6F628AFAB1A0086F79F /* HeadsetControl-Status.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		55E6B6EE28AFAB1A0086F79F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					55E6B6F528AFAB1A0086F79F = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 55E6B6F128AFAB1A0086F79F /* Build configuration list for PBXProject "HeadsetControl-Status" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 55E6B6ED28AFAB1A0086F79F;
+			packageReferences = (
+				5560F37028AFFE0100AAB565 /* XCRemoteSwiftPackageReference "Subprocess" */,
+				55946ADD28B6ABFD006B5797 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
+				55DB993228BAB52F007021DF /* XCRemoteSwiftPackageReference "Defaults" */,
+			);
+			productRefGroup = 55E6B6F728AFAB1A0086F79F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				55E6B6F528AFAB1A0086F79F /* HeadsetControl-Status */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		55E6B6F428AFAB1A0086F79F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55E6B70128AFAB1A0086F79F /* Preview Assets.xcassets in Resources */,
+				55E6B6FE28AFAB1A0086F79F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		55946AE028B6AC38006B5797 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		55E6B6F228AFAB1A0086F79F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55E6B6FC28AFAB1A0086F79F /* StatusbarMenuView.swift in Sources */,
+				551EB55428B237C00064DF43 /* SettingsView.swift in Sources */,
+				55E6B70928AFAB9D0086F79F /* StatusBarController.swift in Sources */,
+				5568BEFF28B0190D00D0B721 /* HeadsetControlAdapter.swift in Sources */,
+				5568BF0428B13CC300D0B721 /* Store.swift in Sources */,
+				55E6B6FA28AFAB1A0086F79F /* HeadsetControl_StatusApp.swift in Sources */,
+				5568BF0228B0199B00D0B721 /* Models.swift in Sources */,
+				5568BF0928B1438300D0B721 /* BatteryComponent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		55E6B70328AFAB1A0086F79F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		55E6B70428AFAB1A0086F79F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		55E6B70628AFAB1A0086F79F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "HeadsetControl-Status/HeadsetControl_Status.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HeadsetControl-Status/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "HeadsetControl-Status/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "s0mmos.HeadsetControl-Status";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		55E6B70728AFAB1A0086F79F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "HeadsetControl-Status/HeadsetControl_Status.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"HeadsetControl-Status/Preview Content\"";
+				DEVELOPMENT_TEAM = XL36SLCQP8;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "HeadsetControl-Status/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "s0mmos.HeadsetControl-Status";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		55E6B6F128AFAB1A0086F79F /* Build configuration list for PBXProject "HeadsetControl-Status" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55E6B70328AFAB1A0086F79F /* Debug */,
+				55E6B70428AFAB1A0086F79F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55E6B70528AFAB1A0086F79F /* Build configuration list for PBXNativeTarget "HeadsetControl-Status" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55E6B70628AFAB1A0086F79F /* Debug */,
+				55E6B70728AFAB1A0086F79F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5560F37028AFFE0100AAB565 /* XCRemoteSwiftPackageReference "Subprocess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jamf/Subprocess.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		55946ADD28B6ABFD006B5797 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		55DB993228BAB52F007021DF /* XCRemoteSwiftPackageReference "Defaults" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/Defaults";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5560F37128AFFE0100AAB565 /* Subprocess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5560F37028AFFE0100AAB565 /* XCRemoteSwiftPackageReference "Subprocess" */;
+			productName = Subprocess;
+		};
+		55946ADE28B6ABFD006B5797 /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55946ADD28B6ABFD006B5797 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			productName = LaunchAtLogin;
+		};
+		55DB993328BAB52F007021DF /* Defaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55DB993228BAB52F007021DF /* XCRemoteSwiftPackageReference "Defaults" */;
+			productName = Defaults;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 55E6B6EE28AFAB1A0086F79F /* Project object */;
+}
