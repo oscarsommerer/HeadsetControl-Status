@@ -28,8 +28,14 @@ jobs:
 
     - run: ls -R
 
+    - name: Zip release artifacts
+      run: zip -r HeadsetControl-Status.app.zip ./release/HeadsetControl-Status.app
+
     - name: Create release
       uses: ncipollo/release-action@v1
       with:
-        artifacts: ./release/HeadsetControl-Status.app
+        artifacts: ./release/HeadsetControl-Status.app.zip
         tag: ${{ env.BUILD_VERSION }}
+        allowUpdates: true
+        artifactErrorsFailBuild: true
+        replacesArtifacts: true
