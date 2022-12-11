@@ -12,10 +12,10 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Build
-      run: xcodebuild clean build -scheme HeadsetControl-Status -configuration Release
+      run: xcodebuild -scheme HeadsetControl-Status -configuration Release clean build
 
     - name: Create archive
-      run: xcodebuild archive -scheme HeadsetControl-Status -configuration Release -archivePath ./archive
+      run: xcodebuild -scheme HeadsetControl-Status -configuration Release -archivePath ./archive archive
 
     - name: Export app
-      run: xcodebuild -archivePath archive.xarchive -exportArchive -exportPath ./release/HeadsetControl-Status.app -exportOptionsPlist HeadsetControl-Status/Info.plist
+      run: xcodebuild -archivePath archive.xarchive -exportArchive -exportPath ./release/HeadsetControl-Status.app
