@@ -15,7 +15,7 @@ jobs:
       run: xcodebuild clean build -scheme HeadsetControl-Status -configuration Release
 
     - name: Create archive
-      run: xcodebuild archive -scheme HeadsetControl-Status -configuration Release -archivePath ./build/archive.xarchive
+      run: xcodebuild archive -scheme HeadsetControl-Status -configuration Release
 
     - name: Export app
-      run: xcodebuild -archivePath ./build/archive.xarchive -exportArchive -exportPath ./release/HeadsetControl-Status.app -exportOptionsPlist HeadsetControl-Status/Info.plist
+      run: xcodebuild -archivePath ./HeadsetControl-Status/build/archive.xarchive -exportArchive -exportPath ./release/HeadsetControl-Status.app -exportOptionsPlist HeadsetControl-Status/Info.plist
