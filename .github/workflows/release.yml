@@ -20,14 +20,16 @@ jobs:
     - name: Create archive
       run: xcodebuild -scheme HeadsetControl-Status -configuration Release -archivePath build/archive archive
 
-    # - name: Get release version
-    #   run: xcodebuild -showBuildSettings | grep MARKETING_VERSION | sed 's/[ ]*MARKETING_VERSION = //'
+    - name: Get release version
+      run: echo "BUILD_VERSION=$(xcodebuild -showBuildSettings | grep MARKETING_VERSION | sed 's/[ ]*MARKETING_VERSION = //')" >> $GITHUB_ENV
 
     - name: Export app
       run: xcodebuild -archivePath build/archive.xcarchive -exportArchive -exportPath ./release/HeadsetControl-Status.app -exportOptionsPlist ./exportOptions.plist
 
+    - run: ls -R
+    
     - name: Create release
       uses: ncipollo/release-action@v1
       with:
         artifacts: ./release/HeadsetControl-Status.app
-        tag: "v1.0.0"
+        tag: { env.BUILD_VERSION }
