@@ -20,4 +20,4 @@ jobs:
     - run: ls -R 
 
     - name: Export app
-      run: xcodebuild -archivePath ../build/archive.xarchive -exportArchive -exportPath ./release/HeadsetControl-Status.app -exportOptionsPlist ./exportOptions.plist
+      run: xcodebuild -archivePath ../build/archive.xcarchive -exportArchive -exportPath ./release/HeadsetControl-Status.app -exportOptionsPlist ./exportOptions.plist
