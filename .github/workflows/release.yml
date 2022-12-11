@@ -1,0 +1,41 @@
+name: release
+on:
+  push:
+    tags:
+    - '*'
+  pull_request:
+
+jobs:
+  publish:
+    runs-on: macos-12
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup signing certificate
+      uses: Apple-Actions/import-codesign-certs@v1
+      with:
+        p12-file-base64: ${{ secrets.SIGNING_CERTIFICATE_BASE64 }}
+        p12-password: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
+
+    - name: Create archive
+      run: xcodebuild -scheme HeadsetControl-Status -configuration Release -archivePath build/archive archive
+
+    - name: Get release version
+      run: echo "BUILD_VERSION=$(xcodebuild -showBuildSettings | grep MARKETING_VERSION | sed 's/[ ]*MARKETING_VERSION = //')" >> $GITHUB_ENV
+
+    - name: Export app
+      run: xcodebuild -archivePath build/archive.xcarchive -exportArchive -exportPath ./release -exportOptionsPlist ./exportOptions.plist
+
+    - run: ls -R
+
+    - name: Zip release artifacts
+      run: zip -r ./release/HeadsetControl-Status.app.zip ./release/HeadsetControl-Status.app
+
+    - name: Create release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: ./release/HeadsetControl-Status.app.zip
+        tag: ${{ env.BUILD_VERSION }}
+        allowUpdates: true
+        artifactErrorsFailBuild: true
+        replacesArtifacts: true

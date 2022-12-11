@@ -132,19 +132,13 @@ iOSInjectionProject/
 ### SwiftPM ###
 Packages
 xcuserdata
-*.xcodeproj
-
 
 ### Xcode ###
 
 ## Xcode 8 and earlier
 
-### Xcode Patch ###
-*.xcodeproj/*
-!*.xcodeproj/project.pbxproj
-!*.xcodeproj/xcshareddata/
-!*.xcworkspace/contents.xcworkspacedata
-/*.gcno
-**/xcshareddata/WorkspaceSettings.xcsettings
+xcuserdata
+*.xcbkptlist
+*.xcuserstate
 
 # End of https://www.toptal.com/developers/gitignore/api/osx,xcode,git,swift,swiftpm
