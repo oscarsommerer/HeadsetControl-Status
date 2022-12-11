@@ -1,0 +1,17 @@
+name: build
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build
+      run: xcodebuild clean build -workspace ./HeadsetControl-Status.xcodeproj -scheme HeadsetControl-Status 
+
+
