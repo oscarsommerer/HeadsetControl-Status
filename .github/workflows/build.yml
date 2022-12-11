@@ -12,6 +12,6 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Build
-      run: xcodebuild clean build -workspace ./HeadsetControl-Status.xcodeproj -scheme HeadsetControl-Status 
+      run: xcodebuild clean build -scheme HeadsetControl-Status -configuration Release
 
 
