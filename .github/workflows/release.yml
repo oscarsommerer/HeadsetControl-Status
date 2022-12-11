@@ -17,8 +17,6 @@ jobs:
     - name: Create archive
       run: xcodebuild -scheme HeadsetControl-Status -configuration Release -archivePath build/archive archive
 
-    - run: ls -R 
-
     - name: Export app
       run: xcodebuild -archivePath build/archive.xcarchive -exportArchive -exportPath ./release/HeadsetControl-Status.app -exportOptionsPlist ./exportOptions.plist
       env: 
@@ -26,3 +24,4 @@ jobs:
         CODE_SIGNING_REQUIRED: "NO"
         CODE_SIGN_ENTITLEMENTS: ""
         CODE_SIGNING_ALLOWED: "NO"
+        DEVELOPMENT_TEAM: "MeMyselfAndI"
