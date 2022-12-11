@@ -29,7 +29,7 @@ jobs:
     - run: ls -R
 
     - name: Zip release artifacts
-      run: zip -r HeadsetControl-Status.app.zip ./release/HeadsetControl-Status.app
+      run: zip -r ./release/HeadsetControl-Status.app.zip ./release/HeadsetControl-Status.app
 
     - name: Create release
       uses: ncipollo/release-action@v1
