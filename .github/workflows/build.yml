@@ -13,5 +13,4 @@ jobs:
 
     - name: Build
       run: xcodebuild clean build -scheme HeadsetControl-Status -configuration Release
-
-
+        working-directory: .
