@@ -25,7 +25,8 @@ jobs:
     - name: Export app
       run: xcodebuild -archivePath build/archive.xcarchive -exportArchive -exportPath ./release -exportOptionsPlist ./exportOptions.plist
 
-    - run: ls -R
+    -name: Sign app
+      run: codesign --deep --sign "${{ secrets.SIGNING_CERTIFICATE_NAME }}" ./release/HeadsetControl-Status.app.zip
 
     - name: Zip release artifacts
       run: zip -r ./release/HeadsetControl-Status.app.zip ./release/HeadsetControl-Status.app
