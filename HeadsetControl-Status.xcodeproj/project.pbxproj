@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -161,6 +161,7 @@
 				};
 			};
 			buildConfigurationList = 55E6B6F128AFAB1A0086F79F /* Build configuration list for PBXProject "HeadsetControl-Status" */;
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -173,7 +174,6 @@
 				55946ADD28B6ABFD006B5797 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
 				55DB993228BAB52F007021DF /* XCRemoteSwiftPackageReference "Defaults" */,
 			);
-			preferredProjectObjectVersion = 77;
 			productRefGroup = 55E6B6F728AFAB1A0086F79F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
