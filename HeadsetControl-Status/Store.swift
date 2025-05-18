@@ -183,7 +183,7 @@ class Store: ObservableObject {
             
             capabilities = try self._adapter!.getCapabilities()
             
-            if (headsetDetected.toNative() != _previousHeadsetDetectedState) {
+            if (headsetDetected != _previousHeadsetDetectedState) {
                 restorePersistedState()
             }
             
