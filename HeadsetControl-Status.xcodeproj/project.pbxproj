@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 90;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -41,11 +41,13 @@
 /* Begin PBXFrameworksBuildPhase section */
 		55E6B6F328AFAB1A0086F79F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				55DB993428BAB52F007021DF /* Defaults in Frameworks */,
 				55946ADF28B6ABFD006B5797 /* LaunchAtLogin in Frameworks */,
 				5560F37228AFFE0100AAB565 /* Subprocess in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -131,6 +133,8 @@
 			);
 			buildRules = (
 			);
+			dependencies = (
+			);
 			name = "HeadsetControl-Status";
 			packageProductDependencies = (
 				5560F37128AFFE0100AAB565 /* Subprocess */,
@@ -169,7 +173,7 @@
 				55946ADD28B6ABFD006B5797 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
 				55DB993228BAB52F007021DF /* XCRemoteSwiftPackageReference "Defaults" */,
 			);
-			preferredProjectObjectVersion = 90;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 55E6B6F728AFAB1A0086F79F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -182,27 +186,39 @@
 /* Begin PBXResourcesBuildPhase section */
 		55E6B6F428AFAB1A0086F79F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				55E6B70128AFAB1A0086F79F /* Preview Assets.xcassets in Resources */,
 				55E6B6FE28AFAB1A0086F79F /* Assets.xcassets in Resources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		55946AE028B6AC38006B5797 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			shellPath = /bin/sh;
-			shellScript = (
-				"\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\"",
-				"",
+			buildActionMask = 12;
+			files = (
 			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		55E6B6F228AFAB1A0086F79F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 				55E6B6FC28AFAB1A0086F79F /* StatusbarMenuView.swift in Sources */,
 				551EB55428B237C00064DF43 /* SettingsView.swift in Sources */,
@@ -213,11 +229,12 @@
 				5568BF0228B0199B00D0B721 /* Models.swift in Sources */,
 				5568BF0928B1438300D0B721 /* BatteryComponent.swift in Sources */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		55E6B70328AFAB1A0086F79F /* Debug configuration for PBXProject "HeadsetControl-Status" */ = {
+		55E6B70328AFAB1A0086F79F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -278,7 +295,7 @@
 			};
 			name = Debug;
 		};
-		55E6B70428AFAB1A0086F79F /* Release configuration for PBXProject "HeadsetControl-Status" */ = {
+		55E6B70428AFAB1A0086F79F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -333,7 +350,7 @@
 			};
 			name = Release;
 		};
-		55E6B70628AFAB1A0086F79F /* Debug configuration for PBXNativeTarget "HeadsetControl-Status" */ = {
+		55E6B70628AFAB1A0086F79F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -362,7 +379,7 @@
 			};
 			name = Debug;
 		};
-		55E6B70728AFAB1A0086F79F /* Release configuration for PBXNativeTarget "HeadsetControl-Status" */ = {
+		55E6B70728AFAB1A0086F79F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -399,17 +416,19 @@
 		55E6B6F128AFAB1A0086F79F /* Build configuration list for PBXProject "HeadsetControl-Status" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				55E6B70328AFAB1A0086F79F /* Debug configuration for PBXProject "HeadsetControl-Status" */,
-				55E6B70428AFAB1A0086F79F /* Release configuration for PBXProject "HeadsetControl-Status" */,
+				55E6B70328AFAB1A0086F79F /* Debug */,
+				55E6B70428AFAB1A0086F79F /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		55E6B70528AFAB1A0086F79F /* Build configuration list for PBXNativeTarget "HeadsetControl-Status" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				55E6B70628AFAB1A0086F79F /* Debug configuration for PBXNativeTarget "HeadsetControl-Status" */,
-				55E6B70728AFAB1A0086F79F /* Release configuration for PBXNativeTarget "HeadsetControl-Status" */,
+				55E6B70628AFAB1A0086F79F /* Debug */,
+				55E6B70728AFAB1A0086F79F /* Release */,
 			);
+			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
