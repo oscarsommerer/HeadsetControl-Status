@@ -23,6 +23,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let store = Store(HeadsetControlAdapter())
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        if let window = NSApplication.shared.windows.first {
+            window.close()
+        }
+        
         let popupView = NSHostingView(rootView: StatusbarMenu(store: store))
         popupView.frame = NSRect(x: 0, y: 0, width: 200, height: 160)
         statusBar = StatusBarController(popupView, store: store)
